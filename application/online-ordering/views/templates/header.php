@@ -36,6 +36,10 @@
 			font-size:12px;
 			background-color:#F1F1F1;
 		}
+		
+		.center {
+			text-align: center;
+		}
 		</style>
 </head>
 	<body>

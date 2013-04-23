@@ -7,11 +7,16 @@ class Parts_model extends CI_Model {
 	
 	public function get_parts($id='') {
 		if ($id === '') {
-			$query = $this->db->get('parts');
+			
+			$this->db->select('parts.*, categories.name as part_category');
+			$this->db->from('parts');
+			$this->db->join('categories', 'parts.category_id = categories.id');
+			
+			$query = $this->db->get();
 			return $query->result_array();
 		}
 	
-		$query = $this->db->get_where('parts', array('id' => $id));
+		$query = $this->db->where('parts.id', $id);
 		return $query->row_array();
 	}
 }

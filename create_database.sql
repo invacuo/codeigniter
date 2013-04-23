@@ -36,3 +36,33 @@ CREATE TABLE `parts` (
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+INSERT INTO 
+	`online_ordering`.`categories` (`name`) 
+VALUES 
+	('Gears'), 
+	('Belts'), 
+	('Motors'), 
+	('Thermostats'), 
+	('Fuses');
+
+ALTER TABLE  `customers` ADD  `email` VARCHAR( 200 ) NOT NULL
+
+ALTER TABLE  `customers` ADD UNIQUE (
+`email`
+);
+
+INSERT INTO 
+	`online_ordering`.`parts` (`id`, `name`, `category_id`) 
+VALUES 
+	('Thermostat for Frigidaire Dryer FLW01134', '4'), 
+	('6 Inch gear', '1'), 
+	('2 inch rubber belt', '2'), 
+	('12V DC Motor', '3'), 
+	('30 amp Fuse', '5'),
+	('Thermostat for Kenmore AC KM1134', '4'), 
+	('2 Inch gear', '1'), 
+	('4 inch belt', '2'), 
+	('5V DC Motor', '3'), 
+	('12 amp Fuse', '5');
+
