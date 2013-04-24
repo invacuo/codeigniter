@@ -36,7 +36,8 @@ if(count($parts)===0) {
 					//codeigniter's cart requires each item to have id, name, price and qty
 		            $data = array(
 		            		'part-name-' . $part['id']  => $part['name'],
-		            		'part-price-' . $part['id'] => $part['price']
+		            		'part-price-' . $part['id'] => $part['price'],
+		            		'part-category-name-' . $part['id']  => $part['part_category']
 		            );
 		             
 					echo form_hidden($data);
@@ -45,8 +46,13 @@ if(count($parts)===0) {
 				<tr>
 					<td colspan="4">
 						<div class="center">
-							<input type="submit" name="submit" value="Add to cart" class="btn btn-primary"/> 
-							<input type="reset" value="Clear" class="btn" />
+							<?php echo form_submit(array(
+				              'name'    => 'submit',
+				              'value'   => 'Add to cart',
+							  'class'	=> 'btn btn-primary'));?>
+							<?php echo form_reset(array(
+				              'value'   => 'Clear',
+							  'class'	=> 'btn'));?>
 						</div>
 					</td>
 				</tr>

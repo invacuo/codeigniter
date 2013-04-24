@@ -64,10 +64,10 @@
 						<a class="brand" href="/">Online Ordering</a>
 						<div class="nav-collapse collapse">
 							<p class="navbar-text pull-right">
-								<a href="/cart/" class="navbar-link">Cart</a>
+								<a href="/cart/" class="navbar-link">View Cart</a>
 							</p>
 							<ul class="nav">
-								<li <?php if($_SERVER['PHP_SELF']=='/index.php/parts') { echo 'class="active"';}?>><a href="/parts">Parts</a></li>
+								<li <?php if($_SERVER['PHP_SELF']=='/index.php/parts' || $_SERVER['PHP_SELF']=='/index.php/') { echo 'class="active"';}?>><a href="/parts">Parts</a></li>
 								<li <?php if($_SERVER['PHP_SELF']=='/index.php/orders') { echo 'class="active"';}?>><a href="/orders">Orders by customer</a></li>
 							</ul>
 						</div><!--/.nav-collapse -->

@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "pages/view";
+$route['default_controller'] = "parts/index";
 $route['404_override'] = '';
 
 $route['part/:num'] = "parts/lookup";

@@ -10,8 +10,6 @@ class Parts extends CI_Controller {
 		$data['title'] = 'Parts Catalog';		
 		$data['parts'] = $this->parts_model->get_parts();
 		
-		$this->load->helper('form');
-		
 		$this->load->library('form_validation');
 		
 		//TODO: Extend the codeigniter's form_validation library
@@ -26,13 +24,13 @@ class Parts extends CI_Controller {
 				
 				foreach($this->input->post('part-qty') as $partId => $partQty) {
 					//add the parts to the cart
-					
-					if($partQty > 0) {						
+					if($partQty > 0) {
 						array_push($cartItems , array(
 								'id'      => ''.$partId,
 								'qty'     => $partQty,
 								'price'   => $this->input->post('part-price-'.$partId),
-								'name'    => $this->input->post('part-name-'.$partId)
+								'name'    => $this->input->post('part-name-'.$partId),
+								'options' => array('part-category-name' =>  $this->input->post('part-category-name-'.$partId))
 						));
 					}
 				}
