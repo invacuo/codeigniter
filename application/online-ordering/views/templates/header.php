@@ -59,7 +59,7 @@
 						<a class="brand" href="/">Online Ordering</a>
 						<div class="nav-collapse collapse">
 							<p class="navbar-text pull-right">
-								<a href="#" class="navbar-link">Cart</a>
+								<a href="/cart/" class="navbar-link">Cart</a>
 							</p>
 							<ul class="nav">
 								<li <?php if($_SERVER['PHP_SELF']=='/index.php/parts') { echo 'class="active"';}?>><a href="/parts">Parts</a></li>
