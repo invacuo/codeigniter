@@ -3,8 +3,6 @@ if(count($parts)===0) {
 	echo 'There are no parts in the catalog.';
 } else {
 	echo form_open('',array('name' => 'part-list-form', 'id' => 'part-list-form'));
-	
-	
 ?>
 		<table class="table table-bordered table-hover">
 			<thead>

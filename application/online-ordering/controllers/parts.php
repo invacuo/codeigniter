@@ -12,7 +12,6 @@ class Parts extends CI_Controller {
 		
 		$this->load->helper('form');
 		
-		
 		$this->load->library('form_validation');
 		
 		//TODO: Extend the codeigniter's form_validation library
@@ -21,17 +20,26 @@ class Parts extends CI_Controller {
 			if(implode("", $this->input->post('part-qty')) ==='') {
 				$data['alertMessage'] = 'Please select at least one part.';
 			} else {
-				foreach($this->input->post('part-qty') as $part) {
+				$this->load->library('cart');
+				
+				$data['testvar'] = '';
+				
+				foreach($this->input->post('part-qty') as $partId => $partQty) {
 					//add the parts to the cart
-					$this->load->library('cart');
-					$cartItem = array(
-							'id'      => $part,
-							'qty'     => 1,
-							'price'   => 39.95,
-							'name'    => 'T-Shirt'
-					);
-		
-					$this->cart->insert($data);
+					
+					if($partQty > 0) {
+						$data['testvar'].=$partId. ','. $partQty. ','.$this->input->post('part-price-'.$partId). ','.$this->input->post('part-name-'.$partId).'<br>';
+						
+						
+						$cartItem = array(
+								'id'      => ''.$partId,
+								'qty'     => $partQty,
+								'price'   => 0.0,
+								'name'    => 'asdasdsad'
+						);
+			
+						$this->cart->insert($cartItem);
+					}
 				}
 				
 				$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
