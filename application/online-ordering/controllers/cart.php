@@ -9,6 +9,13 @@ class Cart extends CI_Controller {
 	
 	public function index()	{
 		$data = array();
+		
+		if($this->cart->total_items() ==0) {
+			$data['infoMessage'] = 'Your cart is empty.<a href="/parts">Click Here</a> to browse parts.';
+		} else {
+			$data['successMessage'] = 'Cart updated.';
+		}
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/cart_display', $data);
 		$this->load->view('templates/footer');
@@ -35,15 +42,27 @@ class Cart extends CI_Controller {
 				}
 		
 				$this->cart->update($cartItems);
-				$data['successMessage'] = 'Cart updated.';
+				
+				if($this->cart->total_items() ==0) {
+					$data['infoMessage'] = 'Your cart is empty.<a href="/parts">Click Here</a> to browse parts.';					
+				} else {
+					$data['successMessage'] = 'Cart updated.';
+				}
 			}
 		}
 		
 		
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/cart_display', $data);
+		if($this->cart->total_items() ==0 || $this->input->post('submit')==='Update cart') {
+			$this->load->view('pages/cart_display', $data);
+		} else {
+			$this->load->view('pages/customer_info', $data);			
+		}
 		$this->load->view('templates/footer');
 	}
 	
+	public function submitOrder() {
+		
+	}
 }

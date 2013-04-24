@@ -37,7 +37,7 @@ if(count($parts)===0) {
 		            $data = array(
 		            		'part-name-' . $part['id']  => $part['name'],
 		            		'part-price-' . $part['id'] => $part['price'],
-		            		'part-category-name-' . $part['id']  => $part['part_category']
+		            		'Category' . $part['id']  => $part['part_category']
 		            );
 		             
 					echo form_hidden($data);

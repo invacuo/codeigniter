@@ -17,6 +17,8 @@ class Parts extends CI_Controller {
 		if($this->input->post()) {
 			if(implode("", $this->input->post('part-qty')) ==='') {
 				$data['alertMessage'] = 'Please select at least one part.';
+			} elseif(preg_match('/([^0-9])/i', implode("", $this->input->post('part-qty')))>0) {
+					$data['alertMessage'] = 'Quantity can only be numeric';
 			} else {
 				$this->load->library('cart');
 				
@@ -30,7 +32,7 @@ class Parts extends CI_Controller {
 								'qty'     => $partQty,
 								'price'   => $this->input->post('part-price-'.$partId),
 								'name'    => $this->input->post('part-name-'.$partId),
-								'options' => array('part-category-name' =>  $this->input->post('part-category-name-'.$partId))
+								'options' => array('Category' =>  $this->input->post('part-category-name-'.$partId))
 						));
 					}
 				}
