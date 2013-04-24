@@ -1,10 +1,10 @@
 START TRANSACTION;
 
 
-create database online_ordering_6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;# 1 row affected.
+create database online_ordering DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-USE online_ordering_6;# MySQL returned an empty result set (i.e. zero rows).
+USE online_ordering;
 
 
 
@@ -12,14 +12,14 @@ CREATE TABLE categories (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;# MySQL returned an empty result set (i.e. zero rows).
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE customers (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;# MySQL returned an empty result set (i.e. zero rows).
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE orders (
@@ -27,7 +27,7 @@ CREATE TABLE orders (
   order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   price decimal(10,0) NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;# MySQL returned an empty result set (i.e. zero rows).
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE order_details (
@@ -36,7 +36,7 @@ CREATE TABLE order_details (
   part_id int(11) NOT NULL,
   quantity int(11) NOT NULL,
   KEY order_id (order_id,customer_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;# MySQL returned an empty result set (i.e. zero rows).
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE parts (
@@ -44,7 +44,7 @@ CREATE TABLE parts (
   name varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   category_id int(11) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;# MySQL returned an empty result set (i.e. zero rows).
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 
 INSERT INTO 
@@ -54,15 +54,15 @@ VALUES
 	('Belts'), 
 	('Motors'), 
 	('Thermostats'), 
-	('Fuses');# 5 rows affected.
+	('Fuses');
 
 
-ALTER TABLE  customers ADD  email VARCHAR( 200 ) NOT NULL;# MySQL returned an empty result set (i.e. zero rows).
+ALTER TABLE  customers ADD  email VARCHAR( 200 ) NOT NULL;
 
 
 ALTER TABLE  customers ADD UNIQUE (
 email
-);# MySQL returned an empty result set (i.e. zero rows).
+);
 
 
 INSERT INTO 
@@ -77,10 +77,10 @@ VALUES
 	('2 Inch gear', '1'), 
 	('4 inch belt', '2'), 
 	('5V DC Motor', '3'), 
-	('12 amp Fuse', '5');# 10 rows affected.
+	('12 amp Fuse', '5');
 
 
-ALTER TABLE  parts ADD  price DECIMAL NOT NULL DEFAULT  '0';# MySQL returned an empty result set (i.e. zero rows).
+ALTER TABLE  parts ADD  price DECIMAL NOT NULL DEFAULT  '0';
 
 
 COMMIT;
