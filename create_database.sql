@@ -66,3 +66,4 @@ VALUES
 	('5V DC Motor', '3'), 
 	('12 amp Fuse', '5');
 
+ALTER TABLE  `parts` ADD  `price` DECIMAL NOT NULL DEFAULT  '0'

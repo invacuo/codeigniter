@@ -40,6 +40,10 @@
 		.center {
 			text-align: center;
 		}
+		
+		.right {
+			text-align: right;
+		}
 		</style>
 </head>
 	<body>
@@ -67,3 +71,15 @@
 			</div><!-- /.navbar navbar-inverse navbar-fixed-top -->
 			
 			<div class="container" id="main-content">
+				<?php if(!empty($alertMessage)) {?>
+					<div class="alert alert-error">
+					<?php echo $alertMessage?>
+					</div>
+				<?php }?>
+				
+				
+				<?php if(!empty($successMessage)) {?>
+					<div class="alert alert-success">
+					<?php echo $successMessage?>
+					</div>
+				<?php }?>

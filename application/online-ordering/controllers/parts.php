@@ -6,31 +6,39 @@ class Parts extends CI_Controller {
 		$this->load->model('parts_model');
 	}
 
-	public function index()	{
+	public function index()	{		
+		$data['title'] = 'Parts Catalog';		
 		$data['parts'] = $this->parts_model->get_parts();
 		
-		$data['title'] = 'Parts Catalog';		
-		$this->load->view('templates/header', $data);
-		
-		
 		$this->load->helper('form');
+		
+		
 		$this->load->library('form_validation');
 		
-		
-		//Default form validation provided by codeigniter does not work for checkboxes
-		//as nothing is submitted unless a checkbox is checked		
-		//TODO: Extend the form validation library and add a new checked validation to it
-		//$this->form_validation->set_rules('part-id[]', 'Part', 'required'); 
-		
-		if(!empty($_POST)) {
-			if(empty($_POST['part-id'])) {	
-				$data['message'] = 'Please select at least one part.';
-				$this->load->view('pages/flash_message', $data);
+		//TODO: Extend the codeigniter's form_validation library
+		//to add a new rule to make sure qty is greater than 0 and write a custom mesage
+		if($this->input->post()) {
+			if(implode("", $this->input->post('part-qty')) ==='') {
+				$data['alertMessage'] = 'Please select at least one part.';
 			} else {
-				//add the parts to the cart
+				foreach($this->input->post('part-qty') as $part) {
+					//add the parts to the cart
+					$this->load->library('cart');
+					$cartItem = array(
+							'id'      => $part,
+							'qty'     => 1,
+							'price'   => 39.95,
+							'name'    => 'T-Shirt'
+					);
+		
+					$this->cart->insert($data);
+				}
+				
+				$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
 			}
 		}
 		
+		$this->load->view('templates/header', $data);
 		$this->load->view('pages/part_list', $data);
 		$this->load->view('templates/footer');
 	}

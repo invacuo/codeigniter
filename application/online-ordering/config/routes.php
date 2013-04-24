@@ -48,6 +48,9 @@ $route['order/:num'] = "orders/lookup";
 $route['orders/'] = "orders/index";
 
 
+$route['cart/'] = "cart/index";
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

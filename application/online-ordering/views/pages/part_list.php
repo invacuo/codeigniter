@@ -2,30 +2,60 @@
 if(count($parts)===0) {
 	echo 'There are no parts in the catalog.';
 } else {
-	echo validation_errors();
 	echo form_open('',array('name' => 'part-list-form', 'id' => 'part-list-form'));
+	
 	
 ?>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th><?php echo form_checkbox(array('class'=>'.select-all'));?></th>
 					<th>Part Name</th>
 					<th>Part Category</th>
+					<th>Price</th>
+					<th>Quantity</th>
 				</tr>
 			</thead>
 			
-            
 			<tbody>
-				<?php foreach ($parts as $part){ ?>
+				<?php foreach ($parts as $part){ ?>				
 			    <tr>
-			    	<td><?php echo form_checkbox('part-id[]', $part['id'])?></td>
 			    	<td><?php echo $part['name']?></td>
 			    	<td><?php echo $part['part_category']?></td>
+			    	<td><div class="right"><?php echo $part['price']?></div></td>
+					<td>
+					<?php
+						$options = array(
+								''  => '0',
+								'1'    => '1',
+								'2'   => '2',
+								'3' => '3',
+								'4'    => '4',
+								'5'   => '5',
+								'6' => '6',
+								'7'   => '7',
+								'8' => '8',
+								'9' => '9',
+								'10' => '10',
+						);
+						
+						echo form_dropdown('part-qty['.$part['id'].']', $options, '0');
+						
+					?>
+		    		</td>
 				</tr>
+				<?php 
+					//create hidden fields to store the name and price of each part
+					//codeigniter's cart requires each item to have id, name, price and qty
+		            $data = array(
+		            		'part-name-' . $part['id']  => $part['name'],
+		            		'part-price-' . $part['id'] => $part['price']
+		            );
+		             
+					echo form_hidden($data);
+				?>
 				<?php } ?>
 				<tr>
-					<td colspan="3">
+					<td colspan="4">
 						<div class="center">
 							<input type="submit" name="submit" value="Add to cart" class="btn btn-primary"/> 
 							<input type="reset" value="Clear" class="btn" />
