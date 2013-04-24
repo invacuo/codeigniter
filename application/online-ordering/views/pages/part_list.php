@@ -21,25 +21,15 @@ if(count($parts)===0) {
 			    	<td><?php echo $part['part_category']?></td>
 			    	<td><div class="right"><?php echo $part['price']?></div></td>
 					<td>
-					<?php
-						$options = array(
-								''  => '0',
-								'1'    => '1',
-								'2'   => '2',
-								'3' => '3',
-								'4'    => '4',
-								'5'   => '5',
-								'6' => '6',
-								'7'   => '7',
-								'8' => '8',
-								'9' => '9',
-								'10' => '10',
-						);
-						
-						echo form_dropdown('part-qty['.$part['id'].']', $options, '0');
-						
-					?>
-		    		</td>
+						<div class="center">
+							<?php echo form_input(array(
+				              'name'    => 'part-qty['.$part['id'].']',
+				              'value'   => '',
+							  'class'	=> 'item-quantity',
+							  'maxlength' => '2'
+				            ));?>
+			            </div>
+		            </td>
 				</tr>
 				<?php 
 					//create hidden fields to store the name and price of each part

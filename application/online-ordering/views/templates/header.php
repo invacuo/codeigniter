@@ -44,6 +44,11 @@
 		.right {
 			text-align: right;
 		}
+		.item-quantity {
+			text-align: right;
+			width:40px;
+			text-align:right;
+		}
 		</style>
 </head>
 	<body>

@@ -3,8 +3,89 @@ class MY_Cart extends CI_Cart {
 
 	public function __construct() {
 		parent::__construct();
-	}
+	}	
 	
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Insert items into the cart and save it to the session table
+	 *
+	 * @access	public
+	 * @param	array
+	 * @return	bool
+	 */
+	function insert($items = array())
+	{
+		// Was any cart data passed? No? Bah...
+		if ( ! is_array($items) OR count($items) == 0)
+		{
+			log_message('error', 'The insert method must be passed an array containing data.');
+			return FALSE;
+		}
+	
+		// You can either insert a single product using a one-dimensional array,
+		// or multiple products using a multi-dimensional one. The way we
+		// determine the array type is by looking for a required array key named "id"
+		// at the top level. If it's not found, we will assume it's a multi-dimensional array.
+		
+		/*foreach($existingCartItems as $existingCartItem){
+						die('asdasdsad');
+						if($existingCartItem['id'] == $val['id'])  {   //if the item we're adding is in cart add up those two quantities						
+							$val['rowid'] = $existingCartItem['rowid'];
+							$val['qty'] = $existingCartItem['qty'] + $val['qty'];
+						}	
+					}*/
+	
+		$save_cart = FALSE;
+		if (isset($items['id']))
+		{
+			if (($rowid = $this->_insert($items)))
+			{
+				$save_cart = TRUE;
+			}
+		}
+		else
+		{
+			foreach ($items as $val)
+			{
+				if (is_array($val) AND isset($val['id']))
+				{
+					$existingCartItems = $this->contents();
+					$isExistingItem = false;
+					foreach($existingCartItems as $existingCartItem){
+						if($existingCartItem['id'] == $val['id'])  {   //if the item we're adding is in cart add up those two quantities
+							$val['rowid'] = $existingCartItem['rowid'];
+							$val['qty'] = $existingCartItem['qty'] + $val['qty'];
+							$isExistingItem = true;
+						}
+					}
+					
+					if($isExistingItem) {						
+						if ($this->_update($val))
+						{
+							$save_cart = TRUE;
+						}
+						
+					} else {						
+						if ($this->_insert($val))
+						{
+							$save_cart = TRUE;
+						}					
+					}
+				}
+			}
+		}
+	
+		// Save the cart data if the insert was successful
+		if ($save_cart == TRUE)
+		{
+			$this->_save_cart();
+			return isset($rowid) ? $rowid : TRUE;
+		}
+	
+		return FALSE;
+	}
 	
 	// --------------------------------------------------------------------
 	
@@ -16,7 +97,7 @@ class MY_Cart extends CI_Cart {
 	 * @return	bool
 	 */
 	function _insert($items = array())
-	{
+	{	
 		// Was any cart data passed? No? Bah...
 		if ( ! is_array($items) OR count($items) == 0)
 		{

@@ -22,26 +22,22 @@ class Parts extends CI_Controller {
 			} else {
 				$this->load->library('cart');
 				
-				$data['testvar'] = '';
+				$cartItems = array();
 				
 				foreach($this->input->post('part-qty') as $partId => $partQty) {
 					//add the parts to the cart
 					
-					if($partQty > 0) {
-						$data['testvar'].=$partId. ','. $partQty. ','.$this->input->post('part-price-'.$partId). ','.$this->input->post('part-name-'.$partId).'<br>';
-						
-						
-						$cartItem = array(
+					if($partQty > 0) {						
+						array_push($cartItems , array(
 								'id'      => ''.$partId,
 								'qty'     => $partQty,
-								'price'   => 0.0,
-								'name'    => 'asdasdsad'
-						);
-			
-						$this->cart->insert($cartItem);
+								'price'   => $this->input->post('part-price-'.$partId),
+								'name'    => $this->input->post('part-name-'.$partId)
+						));
 					}
 				}
 				
+				$this->cart->insert($cartItems);
 				$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
 			}
 		}
