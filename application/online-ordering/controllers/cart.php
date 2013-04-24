@@ -23,7 +23,7 @@ class Cart extends CI_Controller {
 	
 	
 	
-	public function update() {		
+	public function update() {
 		$data = array();
 		
 		$cartItems = array();
@@ -64,5 +64,11 @@ class Cart extends CI_Controller {
 	
 	public function submitOrder() {
 		
+		$this->load->model('orders_model');
+		
+		$data['orderId'] = $this->orders_model->create_order();
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/success');
+		$this->load->view('templates/footer');
 	}
 }

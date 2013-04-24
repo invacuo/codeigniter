@@ -7,7 +7,7 @@ class Parts extends CI_Controller {
 	}
 
 	public function index()	{		
-		$data['title'] = 'Parts Catalog';		
+		$data['title'] = 'Parts Catalog';	
 		$data['parts'] = $this->parts_model->get_parts();
 		
 		$this->load->library('form_validation');
