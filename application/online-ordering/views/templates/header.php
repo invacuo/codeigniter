@@ -80,8 +80,13 @@
 					<div class="alert alert-error">
 					<?php echo $alertMessage?>
 					</div>
-				<?php }?>
+				<?php }?>				
 				
+				<?php if(!empty($infoMessage)) {?>
+					<div class="alert alert-info">
+					<?php echo $infoMessage?>
+					</div>
+				<?php }?>				
 				
 				<?php if(!empty($successMessage)) {?>
 					<div class="alert alert-success">
