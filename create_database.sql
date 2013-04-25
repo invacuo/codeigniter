@@ -126,3 +126,5 @@ VALUES
 	('Timing Belt for Honda Accord 2012', '2'),
 	('230V Brushless DC Motor', '3');
 COMMIT;
+
+ALTER TABLE  order_details ADD  unit_price DECIMAL NOT NULL DEFAULT  '0'
