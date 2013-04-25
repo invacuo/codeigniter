@@ -1,5 +1,5 @@
 <?php
-	echo form_open('/cart/submitOrder', array('name' => 'customer-info-form', 'id' => 'customer-info-formsd', 'class' => 'form-horizontal'));
+	echo form_open('/cart/submitOrder', array('name' => 'customer-info-form', 'id' => 'customer-info-form', 'class' => 'form-horizontal'));
 ?>
 
 	<h2 class="offset1">Please fill in your details</h2>

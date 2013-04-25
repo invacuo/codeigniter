@@ -75,6 +75,7 @@ class Cart extends MY_Controller {
 				$data['title'] = 'Invalid information';				
 				$this->render_page('pages/customer_info', $data);
 			} else {
+				$data['title'] = 'Order Placed';				
 				$this->load->model('orders_model');			
 				$data['orderId'] = $this->orders_model->create_order();
 				$this->render_page('pages/success', $data);
