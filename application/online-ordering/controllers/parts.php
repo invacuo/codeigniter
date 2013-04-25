@@ -25,34 +25,8 @@ class Parts extends MY_Controller {
 		$data['parts'] = $this->parts_model->get_parts();
 		
 		
-		//TODO: Extend the codeigniter's form_validation library
-		//to add a new rule to make sure qty is greater than 0 and write a custom mesage
-		if($this->input->post()) {
-			if(implode("", $this->input->post('part-qty')) ==='') {
-				$data['alertMessage'] = 'Please select at least one part.';
-			} elseif(preg_match('/([^0-9])/i', implode("", $this->input->post('part-qty')))>0) {
-					$data['alertMessage'] = 'Quantity can only be numeric';
-			} else {
-				$this->load->library('cart');
-				
-				$cartItems = array();
-				
-				foreach($this->input->post('part-qty') as $partId => $partQty) {
-					//add the parts to the cart
-					if($partQty > 0) {
-						array_push($cartItems , array(
-								'id'      => ''.$partId,
-								'qty'     => $partQty,
-								'price'   => $this->input->post('part-price-'.$partId),
-								'name'    => $this->input->post('part-name-'.$partId),
-								'options' => array('Category' =>  $this->input->post('part-category-name-'.$partId))
-						));
-					}
-				}
-				
-				$this->cart->insert($cartItems);
-				$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
-			}
+		if($this->addToCart()) {			
+			$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
 		}
 		
 		$this->render_page('pages/part_list', $data);
@@ -66,6 +40,10 @@ class Parts extends MY_Controller {
 		} else {
 			$config['uri_segment'] = 5;
 			$config['base_url'] = '/parts/category/'.$id.'/page/';
+		}
+		
+		if($this->addToCart()) {
+			$data['successMessage'] = 'Item(s) Successfully added to the cart. <a href="/cart/">Click here</a>  to go to your cart.';
 		}
 		
 		$config['total_rows'] = $this->parts_model->get_parts_count($id);
@@ -89,6 +67,39 @@ class Parts extends MY_Controller {
 		}
 		
 		$this->render_page('pages/part_list', $data);
+	}
+	
+	
+	protected function addToCart() {
+		//TODO: Extend the codeigniter's form_validation library
+		//to add a new rule to make sure qty is greater than 0 and write a custom mesage
+		if($this->input->post()) {
+			if(implode("", $this->input->post('part-qty')) ==='') {
+				$data['alertMessage'] = 'Please select at least one part.';
+			} elseif(preg_match('/([^0-9])/i', implode("", $this->input->post('part-qty')))>0) {
+				$data['alertMessage'] = 'Quantity can only be numeric';
+			} else {
+				$this->load->library('cart');
+		
+				$cartItems = array();
+		
+				foreach($this->input->post('part-qty') as $partId => $partQty) {
+					//add the parts to the cart
+					if($partQty > 0) {
+						array_push($cartItems , array(
+								'id'      => ''.$partId,
+								'qty'     => $partQty,
+								'price'   => $this->input->post('part-price-'.$partId),
+								'name'    => $this->input->post('part-name-'.$partId),
+								'options' => array('Category' =>  $this->input->post('part-category-name-'.$partId))
+						));
+					}
+				}
+		
+				return $this->cart->insert($cartItems);
+			}
+		}
+		return false;
 	}
 }
 

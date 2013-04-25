@@ -51,12 +51,6 @@
 			text-align:right;
 		}
 		
-		#customer-info-form input[type="text"], .form-signin input[type="password"] {
-			font-size: 16px;
-			height: auto;
-			margin-bottom: 15px;
-			padding: 7px 9px;
-		}
 		
 		</style>
 </head>
