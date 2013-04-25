@@ -76,7 +76,19 @@
 								<a href="/cart/" class="navbar-link">View Cart</a>
 							</p>
 							<ul class="nav">
-								<li <?php if($_SERVER['PHP_SELF']=='/index.php/parts' || $_SERVER['PHP_SELF']=='/index.php/') { echo 'class="active"';}?>><a href="/parts">Parts</a></li>
+								<li class="dropdown<?php if($_SERVER['PHP_SELF']=='/index.php/parts' || $_SERVER['PHP_SELF']=='/index.php/') { echo ' active';}?>">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										Categories
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<?php //TODO: only show top 5 categories so that we do not go beyond user's screen height?>										
+										<?php foreach($categories as $category) {?>
+											<li><a href="/parts/category/<?php echo $category['id'];?>"><?php echo $category['name'];?></a></li>
+										<?php }?>										
+										<li><a href="/parts/">Browse All Parts</a></li>
+									</ul>
+								</li>
 								<li <?php if($_SERVER['PHP_SELF']=='/index.php/orders') { echo 'class="active"';}?>><a href="/orders">Orders by customer</a></li>
 							</ul>
 						</div><!--/.nav-collapse -->
@@ -84,7 +96,8 @@
 				</div><!--/.navbar-inner -->
 			</div><!-- /.navbar navbar-inverse navbar-fixed-top -->
 			
-			<div class="container" id="main-content">
+			<?php //div below is closed in the footer.php file?>
+			<div class="container" id="main-content"> 
 				<?php if(!empty($alertMessage)) {?>
 					<div class="alert alert-error">
 					<?php echo $alertMessage?>

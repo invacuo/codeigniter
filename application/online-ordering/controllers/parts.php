@@ -1,5 +1,5 @@
 <?php
-class Parts extends CI_Controller {
+class Parts extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -9,8 +9,11 @@ class Parts extends CI_Controller {
 	}
 
 	public function index()	{
-		$data['title'] = 'Parts Catalog';
+		$data['title'] ='All parts';
 		
+		/*TODO: Find a better way of setting the config for pagination
+		 * instead of doing it in each function
+		 * */
 		$config['base_url'] = '/parts/';
 		$config['total_rows'] = $this->parts_model->get_parts_count();
 		$config['per_page'] = 10;
@@ -52,19 +55,11 @@ class Parts extends CI_Controller {
 			}
 		}
 		
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/part_list', $data);
-		$this->load->view('templates/footer');
+		$this->render_page('pages/part_list', $data);
 	}
-
-	/*public function view($id)	{
-		$data['parts'] = $this->parts_model->get_parts($id);
-	}*/
 	
 	public function lookup($id = 0, $page_number = 1) {	
 		
-		
-		$data['title'] = 'Parts By Category';
 		if((int)$id===0) {
 			$config['uri_segment'] = 2;
 			$config['base_url'] = '/parts/';
@@ -84,10 +79,16 @@ class Parts extends CI_Controller {
 		$data['id'] = $id;
 		
 		$data['parts'] = $this->parts_model->get_parts($id, $page_number);
-	
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/part_list', $data);
-		$this->load->view('templates/footer', $data);
+		
+		if(count($data['parts']) == 0) {
+			$data['title'] = 'There are no parts in this category.';
+		} elseif((int)$id!=0) {
+			$data['title'] = $data['parts'][0]['part_category'];
+		} else {
+			$data['title'] ='All parts';
+		}
+		
+		$this->render_page('pages/part_list', $data);
 	}
 }
 

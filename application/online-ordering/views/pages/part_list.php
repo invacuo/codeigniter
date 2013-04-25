@@ -1,7 +1,7 @@
+<h2><?echo $title?></h2>
+
 <?php
-if(count($parts)===0) {
-	echo 'There are no parts in the catalog.';
-} else {
+if(count($parts)>0) {	
 	echo form_open('',array('name' => 'part-list-form', 'id' => 'part-list-form'));
 ?>
 		<table class="table table-bordered table-hover">
@@ -43,9 +43,11 @@ if(count($parts)===0) {
 					echo form_hidden($data);
 				?>
 				<?php } ?>
-				<tr>
-					<td colspan="4"><?php echo $page_links;?></td>
-				</tr>
+				<?php if(!empty($page_links)) {?>
+					<tr>
+						<td colspan="4"><?php echo $page_links;?></td>
+					</tr>
+				<?php }?>
 				<tr>
 					<td colspan="4">
 						<div class="center">

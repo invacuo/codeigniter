@@ -112,5 +112,20 @@ $autoload['language'] = array();
 $autoload['model'] = array();
 
 
+/**
+ * Extra autoload function. Loads core classes automatically.
+ * @param type $class The class to load.
+ */
+function __autoload($class)
+{
+	if (strpos($class, 'CI_') !== 0)
+	{
+		if (file_exists($file = APPPATH . 'core/' . $class . EXT))
+		{
+			include $file;
+		}
+	}
+}
+
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
