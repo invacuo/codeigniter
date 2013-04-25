@@ -1,6 +1,6 @@
 			</div> <!-- /main-content -->
 			<footer>
-				<p>Online Ordering Project</p>
+				<div class="center">Online Ordering Project</div>
 			</footer>
 		</div> <!-- /wrapper -->
 	</body>
