@@ -45,8 +45,8 @@ class Orders_model extends CI_Model {
 		$this->db->insert_batch('order_details', $orderDetails);		
 		$this->db->trans_complete();
 		
-		//TODO: uncomment the line below
-		//$this->cart->destroy();
+		
+		$this->cart->destroy();
 		return $orderId;
 	}
 }

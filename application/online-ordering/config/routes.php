@@ -41,11 +41,16 @@
 $route['default_controller'] = "parts/index";
 $route['404_override'] = '';
 
-$route['part/:num'] = "parts/lookup";
-$route['parts/'] = "parts/index";
 
-$route['order/:num'] = "orders/lookup";
-$route['orders/'] = "orders/index";
+$route['parts/category/(:num)/page/(:num)'] = "parts/lookup/$1/$2";
+$route['parts/category/(:num)/(:any)'] = "parts/lookup/$1";
+$route['parts/category/(:num)'] = "parts/lookup/$1";
+$route['parts/(:num)'] = "parts/lookup/0/$1";
+$route['order/(:num)'] = "orders/lookup/$1";
+
+$route['parts/category/(:any)'] = "parts/index";
+$route['parts/(:any)'] = "parts/index";
+$route['orders/(:any)'] = "orders/index";
 
 
 $route['cart/'] = "cart/index";

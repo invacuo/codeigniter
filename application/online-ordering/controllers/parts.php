@@ -4,13 +4,23 @@ class Parts extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('parts_model');
+		$this->load->library('form_validation');
+		$this->load->library('pagination');
 	}
 
-	public function index()	{		
-		$data['title'] = 'Parts Catalog';	
+	public function index()	{
+		$data['title'] = 'Parts Catalog';
+		
+		$config['base_url'] = '/parts/';
+		$config['total_rows'] = $this->parts_model->get_parts_count();
+		$config['per_page'] = 10;
+		$config['num_links'] = 10;
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config);
+		$data['page_links']=$this->pagination->create_links();
+		
 		$data['parts'] = $this->parts_model->get_parts();
 		
-		$this->load->library('form_validation');
 		
 		//TODO: Extend the codeigniter's form_validation library
 		//to add a new rule to make sure qty is greater than 0 and write a custom mesage
@@ -47,18 +57,36 @@ class Parts extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function view($id)	{
+	/*public function view($id)	{
 		$data['parts'] = $this->parts_model->get_parts($id);
-	}
+	}*/
 	
-	public function lookup($id = '1') {	
-	
+	public function lookup($id = 0, $page_number = 1) {	
+		
+		
+		$data['title'] = 'Parts By Category';
+		if((int)$id===0) {
+			$config['uri_segment'] = 2;
+			$config['base_url'] = '/parts/';
+		} else {
+			$config['uri_segment'] = 5;
+			$config['base_url'] = '/parts/category/'.$id.'/page/';
+		}
+		
+		$config['total_rows'] = $this->parts_model->get_parts_count($id);
+		$config['per_page'] = 10;
+		$config['num_links'] = 10;
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config);
+		$data['page_links']=$this->pagination->create_links();
+		
+		$data['page_links']=$this->pagination->create_links();
 		$data['id'] = $id;
 		
-		$data['parts'] = $this->parts_model->get_parts($id);
+		$data['parts'] = $this->parts_model->get_parts($id, $page_number);
 	
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/part_info', $data);
+		$this->load->view('pages/part_list', $data);
 		$this->load->view('templates/footer', $data);
 	}
 }

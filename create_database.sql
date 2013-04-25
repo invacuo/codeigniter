@@ -83,4 +83,46 @@ VALUES
 ALTER TABLE  parts ADD  price DECIMAL NOT NULL DEFAULT  '0';
 
 
+
+INSERT INTO 
+	online_ordering.parts (name, category_id) 
+VALUES 
+	('Thermostat for Frigidaire Electric Dryer FED2334i', '4'), 
+	('1 Inch gear', '1'), 
+	('1 Inch Spur gear', '1'), 
+	('3 Inch Internal Ring gear', '1'), 
+	('3 Inch Helical gear', '1'), 
+	('3 Inch Face gear', '1'), 
+	('3 inch flat belt', '2'), 
+	('2 inch Vee Belt', '2'), 
+	('Timing Belt for Toyota Camry 2006', '2'),
+	('Timing Belt for Honda Accord 2006', '2'),
+	('5-1-1 Programmable Thermostat', '4'), 
+	('Nest self learning Thermostat', '4'), 
+	('Honeywell Digital Thermostat', '4'), 
+	('5V Brushless DC Motor', '3'), 
+	('Universal AC DC Motor', '3'), 
+	('Induction Motor', '3'), 
+	('Servo Motor', '3'), 	
+	('100 amp Fuse', '5'),	
+	('80 amp Fuse', '5'),	
+	('60 amp Fuse', '5'),	
+	('30 amp Fuse', '5');
+	
+	
+	
+
+INSERT INTO 
+	online_ordering.parts (name, category_id) 
+VALUES 
+	('2 Inch gear', '1'), 
+	('2 Inch Spur gear', '1'), 
+	('4 Inch Internal Ring gear', '1'), 
+	('4 Inch Helical gear', '1'), 
+	('4 Inch Face gear', '1'), 
+	('4 inch flat belt', '2'), 
+	('3 inch Vee Belt', '2'), 
+	('Timing Belt for Toyota Camry 2012', '2'),
+	('Timing Belt for Honda Accord 2012', '2'),
+	('230V Brushless DC Motor', '3');
 COMMIT;

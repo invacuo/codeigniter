@@ -1,6 +1,7 @@
+<!DOCTYPE HTML> 
 <html>
 	<head>
-		<title>Online ordering</title>
+		<title><?php echo $title;?></title>
 		
 		
 		<link href="/assets/css/bootstrap.css" media="all" rel="Stylesheet" type="text/css" /> 
@@ -49,6 +50,14 @@
 			width:40px;
 			text-align:right;
 		}
+		
+		#customer-info-form input[type="text"], .form-signin input[type="password"] {
+			font-size: 16px;
+			height: auto;
+			margin-bottom: 15px;
+			padding: 7px 9px;
+		}
+		
 		</style>
 </head>
 	<body>

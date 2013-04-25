@@ -44,6 +44,9 @@ if(count($parts)===0) {
 				?>
 				<?php } ?>
 				<tr>
+					<td colspan="4"><?php echo $page_links;?></td>
+				</tr>
+				<tr>
 					<td colspan="4">
 						<div class="center">
 							<?php echo form_submit(array(
