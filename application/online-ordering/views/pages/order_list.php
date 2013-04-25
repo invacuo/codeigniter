@@ -1,3 +1,5 @@
-This page will list all the orders 
+This page will show all the orders submitted by a customer by their email address.
 
-Currently showing part <?php var_dump($orders)?>
+<br />
+
+<?php var_dump($orders)?>
