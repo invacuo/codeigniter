@@ -1,5 +1,5 @@
 <?php
-	echo form_open('/orders/lookup', array('name' => 'order-lookup-form', 'class' => 'form-horizontal', 'method' =>'get'));
+	echo form_open('/orders/lookup', array('name' => 'order-lookup-form', 'class' => 'form-horizontal check-submittable', 'method' =>'get'));
 ?>
 
 
@@ -11,7 +11,8 @@
 			<?php echo form_input(array(
 			'name'    => 'order-number',
 			'value'   => set_value('order-number', ''),
-			'placeholder' => 'Enter your order number'
+			'placeholder' => 'Enter your order number',
+			'class'	=> 'submit-enabler'
 			));?>
 			
 			<?php echo form_error('order-number'); ?>

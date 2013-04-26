@@ -25,7 +25,7 @@ if(count($parts)>0) {
 							<?php echo form_input(array(
 				              'name'    => 'part-qty['.$part['id'].']',
 				              'value'   => '',
-							  'class'	=> 'item-quantity',
+							  'class'	=> 'item-quantity submit-enabler numeric-only',
 							  'maxlength' => '2'
 				            ));?>
 			            </div>
@@ -54,7 +54,8 @@ if(count($parts)>0) {
 							<?php echo form_submit(array(
 				              'name'    => 'submit',
 				              'value'   => 'Add to cart',
-							  'class'	=> 'btn btn-primary'));?>
+							  'class'	=> 'btn btn-primary',
+							  'disabled'=>'disabled'));?>
 							<?php echo form_reset(array(
 				              'value'   => 'Clear',
 							  'class'	=> 'btn'));?>
