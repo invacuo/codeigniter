@@ -3,9 +3,9 @@ function isSubmittable() {
 	submittable = false;
 	$('.submit-enabler').each(function(){
 		if($(this).hasClass('numeric-only')) {
-			this.value = this.value.replace(/[^1-9\.]/g,'');
+			this.value = this.value.replace(/[^0-9\.]/g,'');
 		}
-        if($(this).val() != "") {
+		if($.trim($(this).val()) != "" && $.trim($(this).val()) != 0) {
         	submittable = true; // we found one no need to continue searching
         	return false; // break by returning false
         };	            
@@ -27,11 +27,9 @@ $(function() {
 	
 	$('.submit-enabler').on('keyup blur mouseleave', function(e){
 		if($(this).hasClass('numeric-only')) {
-			this.value = this.value.replace(/[^1-9\.]/g,'');
-		} else {
-			console.log('nonedto do anythig');
+			this.value = this.value.replace(/[^0-9\.]/g,'');
 		}
-		if($.trim($(this).val()) != "") {
+		if($.trim($(this).val()) != "" && $.trim($(this).val()) != 0) {
 			$(this).trigger('enable-submit');			
 		} else {
 			submitable = isSubmittable();			
