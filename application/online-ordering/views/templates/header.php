@@ -43,7 +43,7 @@
 										<li><a href="/parts/">Browse All Parts</a></li>
 									</ul>
 								</li>
-								<li <?php if($_SERVER['PHP_SELF']=='/index.php/orders/lookup') { echo 'class="active"';}?>><a href="/orders/lookup">Lookup Order by Id</a></li>
+								<li <?php if($_SERVER['PHP_SELF']=='/index.php/orders/lookup/id') { echo 'class="active"';}?>><a href="/orders/lookup">Order Lookup</a></li>
 							</ul>
 						</div><!--/.nav-collapse -->
 					</div><!--/.container-fluid -->

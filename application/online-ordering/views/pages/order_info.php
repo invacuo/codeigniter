@@ -27,9 +27,12 @@
 			</tr>
 		<?php }?>
 		<tr>
-		  	<td colspan="3"><div class="right"><strong>Total</strong></div></td>
+		  	<td colspan="2"><div class="right"><strong>Total</strong></div></td>
+			<td><div class="center"><?php echo $order['no_of_parts'];?></div></td>
 			<td><div class="right">$<?php echo $order['price'] ?></div></td>	
 		</tr>
 	</tbody>
 </table>
 <?php }?>
+
+<div><strong><a href="/orders/lookup">&lt; Lookup another order</a></strong></div>

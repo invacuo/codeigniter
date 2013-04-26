@@ -47,7 +47,8 @@ $route['parts/category/(:num)/(:any)'] = "parts/lookup/$1";
 $route['parts/category/(:num)'] = "parts/lookup/$1";
 $route['parts/(:num)'] = "parts/lookup/0/$1";
 
-$route['orders/(:any)'] = "orders/lookup";
+$route['orders/(:any)'] = "orders/index";
+$route['orders/'] = "orders/index";
 
 $route['parts/category/(:any)'] = "parts/index";
 $route['parts/(:any)'] = "parts/index";

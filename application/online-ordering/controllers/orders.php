@@ -7,7 +7,7 @@ class Orders extends MY_Controller {
 		$this->load->library('form_validation');
 	}
 	
-	public function lookup() {		
+	public function index() {	
 		if(empty($_GET)) {			
 			$data['title'] = 'Lookup Order Information';
 			$this->render_page('pages/order_lookup', $data);
@@ -17,6 +17,7 @@ class Orders extends MY_Controller {
 			if(empty($_POST)) {
 				$_POST = $_GET;
 			}
+			
 			
 			$this->form_validation->set_rules('email', 'Email', 'valid_email|max_length[200]');
 			$this->form_validation->set_rules('order-number', 'Order Number', 'numeric');
@@ -30,10 +31,11 @@ class Orders extends MY_Controller {
 			} else {
 				$data['id']  = $id;			
 				$data['email'] = $email;
-				if((empty($id))) {			
-					$data['title'] = 'Matching Orders';
-					
+				if((empty($id))) {					
 					$data['orders'] = $this->orders_model->get_orders_by_email($email);
+					
+					$data['title'] = 'Orders by <i>'. $email .'</i>: ' . count($data['orders']);
+					
 					$this->render_page('pages/order_list', $data);
 				} else {					
 					$data['orders'] = $this->orders_model->get_order_details($id);

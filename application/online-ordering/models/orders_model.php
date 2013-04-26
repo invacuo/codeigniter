@@ -7,14 +7,12 @@ class Orders_model extends CI_Model {
 	
 	public function get_orders_by_email($email) {
 		
-		$this->db->select('o.*, cu.name as customer_name, cu.email');
+		$this->db->select('o.*, cu.name as customer_name, cu.email, sum( od.quantity ) as no_of_parts');
 		$this->db->from('orders o');
 		$this->db->join('order_details od', 'o.id = od.order_id');
 		$this->db->join('customers cu', 'cu.id = od.customer_id');		
-		$this->db->where('cu.email',$email);
+		$this->db->where('cu.email',$email)->group_by('o.id');
 		
-		
-	
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -23,12 +21,13 @@ class Orders_model extends CI_Model {
 	
 	public function get_order_details($id) {
 	
-		$this->db->select('o.*, cu.name as customer_name, cu.email, od.unit_price, od.quantity, p.name as part_name, c.name as part_category');
+		$this->db->select('o.*, cu.name as customer_name, cu.email, od.unit_price, od.quantity, p.name as part_name, c.name as part_category, temp.no_of_parts');
 		$this->db->from('orders o');
 		$this->db->join('order_details od', 'o.id = od.order_id');
 		$this->db->join('parts p', 'od.part_id = p.id');
 		$this->db->join('categories c', 'p.category_id = c.id');
-		$this->db->join('customers cu', 'c.id = od.customer_id');
+		$this->db->join('customers cu', 'cu.id = od.customer_id');
+		$this->db->join('(select order_id, sum(quantity) as no_of_parts from order_details group by order_id) temp', 'o.id = temp.order_id');
 	
 		if ($id!= '' && (int)$id != 0) {
 			$this->db->where('o.id', $id);
