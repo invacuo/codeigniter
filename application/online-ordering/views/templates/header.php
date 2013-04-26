@@ -13,6 +13,12 @@
 		<link href="/assets/css/style.css" media="all" rel="Stylesheet" type="text/css" /> 
 		<script type="text/javascript" src="/assets/js/jquery.forcenumeric.js"></script>
 		<script type="text/javascript" src="/assets/js/validation.js"></script>
+		
+		<?php if(!empty($page_specific_js)) { //if users want to add some page specific js then that will be rendered here. It should be set in the controller.?>
+			<script>
+				<?php echo $page_specific_js;?>
+			</script>
+		<?php }?>
 </head>
 	<body>
 		<div id="wrapper">
