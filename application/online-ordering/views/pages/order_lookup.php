@@ -1,3 +1,4 @@
+<h2>Order Lookup</h2>
 <?php
 	echo form_open('/orders/lookup', array('name' => 'order-lookup-form', 'class' => 'search check-submittable', 'method' =>'get'));
 ?>
