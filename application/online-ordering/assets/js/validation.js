@@ -2,7 +2,9 @@ function isSubmittable() {
 	//check if any of the other textboxes are filled
 	submittable = false;
 	$('.submit-enabler').each(function(){
-		this.value = this.value.replace(/[^1-9\.]/g,'');
+		if($(this).hasClass('numeric-only')) {
+			this.value = this.value.replace(/[^1-9\.]/g,'');
+		}
         if($(this).val() != "") {
         	submittable = true; // we found one no need to continue searching
         	return false; // break by returning false
@@ -24,8 +26,11 @@ $(function() {
 	});
 	
 	$('.submit-enabler').on('keyup blur mouseleave', function(e){
-		this.value = this.value.replace(/[^1-9\.]/g,'');
-
+		if($(this).hasClass('numeric-only')) {
+			this.value = this.value.replace(/[^1-9\.]/g,'');
+		} else {
+			console.log('nonedto do anythig');
+		}
 		if($.trim($(this).val()) != "") {
 			$(this).trigger('enable-submit');			
 		} else {
